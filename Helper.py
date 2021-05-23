@@ -18,8 +18,9 @@ import cv2
 
 def image_classification(image):
     img_size = 150
-    resized = cv2.resize(image, (img_size, img_size, 3))
-    resized /= 255
+    resized = cv2.resize(image, (img_size, img_size))
+    resized = resized / 255
+    resized = resized.reshape(-1, img_size, img_size, 3)
     model = load_model('image_classification_model.h5')
     prob = model.predict([resized])
     return prob
