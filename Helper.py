@@ -13,10 +13,16 @@ from nltk.tokenize import word_tokenize
 from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.preprocessing.text import tokenizer_from_json
 from tensorflow.keras.preprocessing import sequence
+import cv2
 
 
-def image_classification():
-    pass
+def image_classification(image):
+    img_size = 150
+    resized = cv2.resize(image, (img_size, img_size, 3))
+    resized /= 255
+    model = load_model('image_classification_model.h5')
+    prob = model.predict([resized])
+    return prob
 
 
 def text_classification(text):
