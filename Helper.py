@@ -21,7 +21,7 @@ def image_classification(image):
     resized = cv2.resize(image, (img_size, img_size))
     resized = resized / 255
     resized = resized.reshape(-1, img_size, img_size, 3)
-    model = load_model('image_classification_model.h5')
+    model = load_model('./models/image_classification_model.h5')
     prob = model.predict([resized])
     return prob
 
@@ -33,7 +33,7 @@ def text_classification(text):
     matrix = tokenizer.texts_to_matrix([text])
     sequences = sequence.pad_sequences(matrix, maxlen=1000)
     print(sequences.shape)
-    model = load_model('text_classification_model.h5')
+    model = load_model('./models/text_classification_model.h5')
     prob = model.predict(sequences)
     return prob
 
